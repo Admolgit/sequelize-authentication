@@ -4,10 +4,12 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const productRouter = require('./src/routes/productRoutes');
 
 const app = express();
 
 dotenv.config()
+
 
 // This is the middle ware
 app.use(helmet())
@@ -17,6 +19,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+
+// routes
+app.use('/', productRouter)
 
 // Testin my api
 app.get('/', (req, res) => {
