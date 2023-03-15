@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Review = sequelize.define('review', {
+  return Review = sequelize.define('review', {
     rating: {
       type: DataTypes.INTEGER
     },
@@ -10,6 +10,4 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN
     }
   })
-
-  return Review
 }
