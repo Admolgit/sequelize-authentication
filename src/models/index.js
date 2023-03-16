@@ -27,6 +27,7 @@ db.sequelize = sequelize;
 // For ORM
 db.products = require("../models/productModels")(sequelize, DataTypes);
 db.reviews = require("./reviewModel.js")(sequelize, DataTypes);
+db.users = require("./userModel")(sequelize, DataTypes);
 
 // Data lose prevention when app runs
 db.sequelize.sync({
