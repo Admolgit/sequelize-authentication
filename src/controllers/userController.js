@@ -86,16 +86,22 @@ module.exports.login = async (req, res) => {
 };
 
 module.exports.getUsers = async (req, res) => {
-  const users = await User.findAll();
+  try {
+    const users = await User.findAll();
 
-  if (!users) {
-    return res.status(404).json({
-      message: "No users found in the database",
-    });
-  } else {
-    res.status(200).json({
-      message: "Users fetched successfully",
-      data: users,
+    if (!users) {
+      return res.status(404).json({
+        message: "No users found in the database",
+      });
+    } else {
+      res.status(200).json({
+        message: "Users fetched successfully",
+        data: users,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "Something went wrong",
     });
   }
 };
@@ -109,7 +115,7 @@ module.exports.getUserById = async (req, res) => {
         id: id,
       },
     });
-  
+
     if (!user) {
       return res.status(404).json({
         message: "User not found in the database",
@@ -123,8 +129,43 @@ module.exports.getUserById = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       message: "Something went wrong",
-      error: error.message
-    })
+      error: error.message,
+    });
+  }
+};
+
+module.exports.updateUser = async (req, res) => {
+  const { id } = req.params;
+  const { fullName, email, password } = req.body;
+
+  try {
+    const user = await User.update(
+      {
+        fullName: fullName,
+        email: email,
+        password: password
+      },
+      {
+      where: {
+        id: id,
+      },
+    }
+    );
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found in the database",
+      });
+    } else {
+      res.status(200).json({
+        message: `User with id ${id} successfully updated`
+      })
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "Something went wrong",
+      error: error.message,
+    });
   }
 };
 
@@ -137,7 +178,7 @@ module.exports.deleteUser = async (req, res) => {
         id: id,
       },
     });
-  
+
     if (!user) {
       return res.status(404).json({
         message: "User not found in the database",
@@ -150,7 +191,7 @@ module.exports.deleteUser = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       message: "Something went wrong",
-      error: error.message
-    })
+      error: error.message,
+    });
   }
 };
