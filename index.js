@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const productRouter = require('./src/routes/productRoutes');
 const userRouter = require('./src/routes/userRoute');
+const reviewsRouter = require('./src/routes/reviewRoutes');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 // routes
 app.use('/', productRouter);
 app.use('/', userRouter);
+app.use('/', reviewsRouter);
 
 // Testin my api
 app.get('/', (req, res) => {

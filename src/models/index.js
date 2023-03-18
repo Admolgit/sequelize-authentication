@@ -32,6 +32,17 @@ db.users = require("./userModel")(sequelize, DataTypes);
 // Data lose prevention when app runs
 db.sequelize.sync({
   force: false,
-}).then(() => console.log('Yes re-sync done!'))
+}).then(() => console.log('Yes re-sync done!'));
+
+// 1 to many relationship
+db.products.hasMany(db.reviews, {
+  foreignKey: 'id',
+  as: 'review'
+});
+
+db.reviews.belongsTo(db.products, {
+  foreignKey: 'id',
+  as: 'product'
+})
 
 module.exports = db;
