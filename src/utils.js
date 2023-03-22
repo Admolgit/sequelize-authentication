@@ -5,5 +5,5 @@ dotenv.config();
 
 module.exports.hashPassword = async (password) => {
   const salt = process.env.SALT;
-  return bcrypt.hash(password, +salt);
+  return bcrypt.hashSync(password, +salt);
 };

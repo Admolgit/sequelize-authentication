@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   return Review = sequelize.define('review', {
     rating: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER
     },
     description: {
       type: DataTypes.TEXT

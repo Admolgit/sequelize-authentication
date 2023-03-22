@@ -79,7 +79,7 @@ module.exports.updateProduct = async (req, res) => {
   try {
     const product = await Product.update(
       {
-        title:title,
+        title: title,
         price: price,
         description: description,
         publish: publish

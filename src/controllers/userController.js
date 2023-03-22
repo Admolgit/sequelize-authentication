@@ -70,11 +70,17 @@ module.exports.login = async (req, res) => {
       const hashedPasword = userExist.dataValues.password;
       if (bcrypt.compareSync(password, hashedPasword)) {
         const token = jwt.sign({ data: userExist }, process.env.JWT_SECRET);
-        res.status(200).json({
+        return res.status(200).json({
+          success: 1,
           message: "User logged in successfully",
           token: token,
           data: userExist,
         });
+      } else {
+        return res.status(403).json({
+          success: 0,
+          message: "Invalid email and password",
+        })
       }
     }
   } catch (error) {
