@@ -4,10 +4,13 @@ const { verify } = require("jsonwebtoken");
 dotenv.config();
 
 const authGuard = (req, res, next) => {
+  // Get bearer and token from authorization header
   let token = req.get("authorization");
   
   if (token) {
+    // Getting the user token
     token = token.split(" ")[1];
+    // Verifying the user token
     verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         res.json({

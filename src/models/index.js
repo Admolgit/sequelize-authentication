@@ -39,7 +39,7 @@ db.products.hasMany(db.reviews, {
   foreignKey: 'id',
   as: 'review'
 });
-
+// Where it belongs to (Productd)
 db.reviews.belongsTo(db.products, {
   foreignKey: 'id',
   as: 'product'
