@@ -11,7 +11,7 @@ const authGuard = (req, res, next) => {
     // Getting the user token
     token = token.split(" ")[1];
     // Verifying the user token
-    verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    verify(token, process.env.JWT_SECRET, expireIn = '1h', (err, decoded) => {
       if (err) {
         res.json({
           success: 0,

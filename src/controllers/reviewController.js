@@ -2,10 +2,17 @@ const db = require("../models");
 
 // Create main model
 const Review = db.reviews;
+const Product = db.products;
 
 module.exports.addReview = async (req, res) => {
   try {
     const { rating, description } = req.body;
+
+    const product = await Product.findAll({
+      where: {
+        id: req.params.id
+      }
+    })
 
     if (!rating || !description) {
       throw new error("All fields must be filled");
