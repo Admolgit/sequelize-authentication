@@ -39,6 +39,10 @@ db.users.hasMany(db.products, {
   foreignKey: 'id',
   as: 'product'
 })
+db.users.hasMany(db.reviews, {
+  foreignKey: 'id',
+  as: 'review'
+})
 
 db.products.hasMany(db.reviews, {
   foreignKey: 'id',
@@ -51,6 +55,11 @@ db.reviews.belongsTo(db.products, {
 })
 
 db.products.belongsTo(db.users, {
+  foreignKey: 'id',
+  as: 'user'
+})
+
+db.reviews.belongsTo(db.users, {
   foreignKey: 'id',
   as: 'user'
 })

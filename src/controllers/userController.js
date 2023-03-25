@@ -8,6 +8,7 @@ dotenv.config();
 
 // Create main model
 const User = db.users;
+const Product = db.products;
 
 // Create product
 module.exports.createUser = async (req, res) => {
@@ -201,3 +202,26 @@ module.exports.deleteUser = async (req, res) => {
     });
   }
 };
+
+module.exports.getUserReviews = async (req, res) => {
+  try {
+    const user = await User.findAll({
+      include: [{
+        model: Product,
+        as: 'product'
+      }],
+      where: {
+        id: req.params.id
+      }
+    });
+    res.status(200).json({
+      message: "product review fetched successfully",
+      data: user
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Something went wrong",
+      error: error.message,
+    });
+  }
+}
