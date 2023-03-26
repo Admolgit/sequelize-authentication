@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const productRouter = require('./src/routes/productRoutes');
 const userRouter = require('./src/routes/userRoute');
 const reviewsRouter = require('./src/routes/reviewRoutes');
+const blogRouter = require('./src/routes/blogRoutes');
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use('/', productRouter);
 app.use('/', userRouter);
 app.use('/', reviewsRouter);
+app.use('/', blogRouter);
 
 // Testin my api
 app.get('/', (req, res) => {
@@ -38,4 +40,4 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 4000
 
 // Main server
-app.listen(PORT, () => console.log(`Sequelize server running on port ${PORT}`))
+app.listen(PORT, () => console.log(`Sequelize server running on port ${PORT}`));
