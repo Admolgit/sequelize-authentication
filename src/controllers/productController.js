@@ -24,24 +24,25 @@ module.exports.createProduct = async (req, res) => {
 }
 
 module.exports.getProducts = async (req, res) => {
-  try {
-    const product = await Product.findAll();
+  res.status(200);
+  // try {
+  //   const product = await Product.findAll();
 
-    if (!product) {
-      return res.status(404).json({
-        message: "No product found in the database",
-      });
-    } else {
-      res.status(200).json({
-        message: "product fetched successfully",
-        data: product,
-      });
-    }
-  } catch (error) {
-    res.status(500).json({
-      message: "Something went wrong",
-    });
-  }
+  //   if (!product) {
+  //     return res.status(404).json({
+  //       message: "No product found in the database",
+  //     });
+  //   } else {
+  //     res.sendStatus(200).json({
+  //       message: "product fetched successfully",
+  //       data: product,
+  //     });
+  //   }
+  // } catch (error) {
+  //   res.send({
+  //     message: "Something went wrong",
+  //   });
+  // }
 };
 
 module.exports.getProductById = async (req, res) => {

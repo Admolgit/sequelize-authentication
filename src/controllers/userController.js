@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
 const db = require("../models");
+const validatePassword = require("../middlewares/validatePassword")
 const { hashPassword } = require("../utils");
 
 dotenv.config();
@@ -15,6 +16,11 @@ module.exports.createUser = async (req, res) => {
   const { fullName, email } = req.body;
   let { password } = req.body;
   try {
+
+    const valid = validatePassword(password);
+
+    if(!valid) throw new Error(`Invalid password, password must not be contain special character`)
+
     if (!fullName || !email || !password)
       throw new error("All fields must be filled");
 
