@@ -1,6 +1,7 @@
 const request = require("supertest");
 const app = require("../src/routes/productRoutes");
-// jest.useFakeTimers()
+jest.useFakeTimers()
+// jest.useRealTimers();
 
 describe("GET /products", () => {
   describe("should return all products", () => {
@@ -11,7 +12,7 @@ describe("GET /products", () => {
         description: "test",
         published: true
       })
-      expect(res.statusCode).toBe(200)
+      expect(res.status).toBe(200)
     });
   });
 });
